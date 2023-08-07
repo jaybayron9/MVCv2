@@ -1,0 +1,17 @@
+
+<div class="flex justify-center items-center h-screen">
+    <form id="login-form" class="flex flex-col gap-4 border border-gray-300 shadow-lg p-6 rounded-md">
+        <div>
+            <label for="username" class="block">Username</label>
+            <input type="text" name="username" id="username" class="block border border-gray-300 p-1">
+        </div> 
+        <div>
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password" class="block border border-gray-400 p-1">
+        </div>
+        <div class="ml-auto">
+            <button type="submit" class="px-2 py-1 bg-blue-500 hover:bg-blue-600 shadow-md font-semibold text-gray-50">LOGIN</button>
+        </div>
+    </form>
+</div>
+<%- include('../partials/footer') %>
