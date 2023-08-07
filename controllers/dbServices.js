@@ -2,7 +2,7 @@ const mysql = require('mysql');
 const dotenv = require('dotenv');
 dotenv.config();
 
-class Model {
+class DBConn {
     constructor() {
         try {
             this.connection = mysql.createConnection({
@@ -23,8 +23,16 @@ class Model {
             throw error;
         }
     }
-    
-    
+
+    closeConnection() {
+        this.connection.end((error) => {
+            if (error) {
+                console.error('Error closing the connection:', error);
+            } else {
+                console.log('Connection closed');
+            }
+        });
+    }
 }
 
-module.exports = Model;
+module.exports = DBConn;

@@ -1,23 +1,24 @@
 const express = require('express'); 
 const path = require('path');
-const dotenv = require('dotenv');
-const cors = require('cors'); 
-
-const serv = express();
-
+const dotenv = require('dotenv');  
+const serv = express(); 
 dotenv.config();
-serv.use(express.json());
-serv.use(express.urlencoded({ extended: false }));
+
+const cors = require('cors');
 serv.use(cors());
+serv.use(express.json()); 
+serv.use(express.urlencoded({ extended : true }));
 
 serv.set('views', path.join(__dirname, 'views'));
 serv.set('view engine', 'ejs');
 
-serv.use('/assets', express.static('assets')); // Tailwind Styling
+serv.use('/assets', express.static('assets')); // Tailwind Styling 
 
-serv.use('/controller', require('./routes/controller_routes.js')); 
-serv.use('/', require('./routes/view_routes')); 
+serv.use('/controller', require('./routes/controller_routes.js'));
+serv.use('/', require('./routes/view_routes'));
 
-serv.listen(process.env.PORT, () => {
-    console.log(`Server running at port ${process.env.PORT}`);
+const PORT = process.env.PORT || 3000;
+
+serv.listen(PORT, () => {
+    console.log(`Server running at port ${PORT}`);
 });
