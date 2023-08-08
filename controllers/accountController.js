@@ -1,6 +1,6 @@
 const DBConn = require('./DBConnection');
 
-class Accounts_controller extends DBConn {
+class accountController extends DBConn {
     constructor() {
         super(); 
     }
@@ -34,4 +34,4 @@ class Accounts_controller extends DBConn {
     }
 }
 
-module.exports = Accounts_controller;
+module.exports = accountController;
