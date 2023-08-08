@@ -19,6 +19,14 @@ serv.use('/controller', require('./routes/controller_routes.js'));
 serv.use('/', require('./routes/view_routes'));
 
 const PORT = process.env.PORT;
-serv.listen(PORT, () => {
-    console.log(`Server running at port ${PORT}`);
+serv.listen(process.env.PORT, () => {
+    console.log(`Server running...`);
 });
+
+
+// HOST=bpcdi8hldlj1g5awf0ub-mysql.services.clever-cloud.com
+// DATABASE=bpcdi8hldlj1g5awf0ub
+// PASSWORD=aoz5qVGgSEOkfqMS5uJN
+// CYCLIC_APP_ID=outrageous-pink-flannel-nightgown
+// CYCLIC_URL=https://outrageous-pink-flannel-nightgown.cyclic.app
+// DB_PORT=3306
