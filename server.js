@@ -18,7 +18,7 @@ serv.use('/node_modules', express.static('node_modules'));
 serv.use('/controller', require('./routes/controller_routes.js'));
 serv.use('/', require('./routes/view_routes'));
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT;
 serv.listen(PORT, () => {
     console.log(`Server running at port ${PORT}`);
 });
