@@ -14,10 +14,12 @@ class DBConn {
             });
 
             this.connection.connect((error) => {
-                if (error) { throw error; }
+                if (error) { console.log(error); }
                 console.log('Connected to the database');
             });
-        } catch (error) { throw error; }
+        } catch (error) { 
+            console.log(error);
+        }
     }
 
     closeConnection() {
