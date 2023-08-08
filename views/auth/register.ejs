@@ -16,16 +16,5 @@
         </div>
     </form>
     <a href="/login" class="text-blue-400 hover:underline">Already have an account?</a>
-</div>
-<script src="assets/js/jshelpers/jquery.min.js"></script> 
-<script>
-    $('#register-form').submit(function(e) {
-        e.preventDefault();
-        $.post("/controller/register", $(this).serialize(),
-            function (resp, textStatus, jqXHR) {
-                console.log(resp)
-            },
-            "json"
-        );
-    })
-</script>
+</div> 
+<%- include('../partials/footer') %>

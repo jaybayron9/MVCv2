@@ -1,24 +1,37 @@
-const DBConn = require('./dbServices');
+const DBConn = require('./DBConnection');
 
-class Authorize extends DBConn {
+class Accounts_controller extends DBConn {
     constructor() {
         super(); 
     }
 
     async registerUser(username, password) {
         try {
-            const newUser = await new Promise((resolve, reject) => { 
-                const query = `INSERT INTO accountes SET ?`;
-                DBConn.query(query, {email: username, password: password}, (err, result) => {
-                    if (err) reject(new Error(err.message));
+            const newUser = await new Promise((resolve, reject) => {
+                const query = `INSERT INTO accounts SET ?`;
+                this.connection.query(query, { email: username, password: password }, (err, result) => {
+                    if (err) reject(err);
                     resolve(result);
-                })
-            })
+                });
+                this.closeConnection();
+            });
             console.log(newUser);
         } catch (error) {
-            console.log(err)
+            console.error(error);
         }
+    }
+
+    async LoginUser(username, password) {
+
+    }
+
+    async forgotPassword(email) {
+
+    }
+
+    async changePassword(email, newPassword, confirmPassword) {
+
     }
 }
 
-module.exports = Authorize;
+module.exports = Accounts_controller;
