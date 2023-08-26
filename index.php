@@ -1,17 +1,24 @@
 <?php
-
-require_once __DIR__ . '/vendor/autoload.php';
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
-$dotenv->load();
-
+date_default_timezone_set("Asia/Manila");
 session_start();
 
-foreach (glob('app/utils/*.php') as $class) { require_once $class; }
-foreach (glob('database/*.php') as $class) { require_once $class; }
-foreach (glob('app/models/*.php') as $class) { require_once $class; }
-foreach (glob('app/controllers/*.php') as $class) { require_once $class; } 
-foreach (glob('routes/*.php') as $class) { require_once $class; } 
+use Router\Router;
 
-echo '<pre>';
-echo print_r($_SERVER);
-echo '</pre>'; 
+require_once __DIR__ . '/vendor/autoload.php';
+Dotenv\Dotenv::createImmutable(__DIR__)->load();
+
+$autoloadDirectories = [
+    'app/utils',
+    'database',
+    'app/models',
+    'app/controllers',
+    'routes'
+];
+
+foreach ($autoloadDirectories as $directory) {
+    foreach (glob("$directory/*.php") as $class) {
+        require_once $class;
+    }
+}
+
+Router::dispatch($_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD']);
