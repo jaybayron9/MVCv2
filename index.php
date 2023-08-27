@@ -19,6 +19,6 @@ foreach ($autoloadDirectories as $directory) {
     foreach (glob("$directory/*.php") as $class) {
         require_once $class;
     }
-}
+} 
 
 Router::dispatch($_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD']);
