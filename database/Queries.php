@@ -1,49 +1,37 @@
 <?php
 
-namespace Query; 
-use PDO;
+namespace Query;
 use SQL\ConnectDB; 
 
-class QueryBuilder extends ConnectDB { 
-    protected $table;
-    protected $conditions = [];
-    protected $params = [];
-    protected $stmt; 
-
-    protected function save($table, $data = []) {
+class Queries extends ConnectDB {
+    protected $stmt;
+    protected $columns;
+    protected $value;
+    protected $where;
+    public function insert($table, $columns = [], $values = []) {
         try {
-            $columns = implode(', ', array_keys($data));
-            $placeholders = ':' . implode(', :', array_keys($data)); 
-            $query = "INSERT INTO $table ($columns) VALUES ($placeholders)";
-            $stmt = ConnectDB::$conn->prepare($query); 
-            foreach ($data as $key => $value) {
-                $stmt->bindValue(":$key", $value);
-            } 
-            return $stmt->execute(); 
-        } catch (\PDOException $e) {
-            echo 'Error: ' . $e->getMessage();
-        }
-    }   
+            if (isset($table)) {
+                $this->stmt = "INSERT INTO $table ";
+            }
 
-    public function table($table) {
-        $this->table = $table;
-        return $this;
-    }
+            if ($columns && $values) { 
+                $column = implode(', ', $columns);
+                $this->stmt .= "($column) "; 
+            }
 
-    public function find($id) {
-        $this->conditions[] = "id = :id";
-        $this->params['id'] = $id;
-        return $this;
-    }
+            if ($values) {
+                $value = implode('\', \'', $values);
+                $this->stmt .= "VALUES ('{$value}')";
+            }
 
-    public function get() {
-        $query = "SELECT * FROM {$this->table}";
-        if (!empty($this->conditions)) {
-            $query .= " WHERE " . implode(" AND ", $this->conditions);
-        }
-
-        $stmt = ConnectDB::$conn->prepare($query);
-        $stmt->execute($this->params);
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $exe = ConnectDB::$conn->prepare($this->stmt);
+            if ($exe->execute()) {
+                echo 'data inserted';
+            } else {
+                echo 'theres a problem inserting data';
+            }
+        } catch (\Throwable $e) {
+            echo $e->getMessage();
+        } 
     }
 }
