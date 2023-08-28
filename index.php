@@ -10,6 +10,7 @@ Dotenv\Dotenv::createImmutable(__DIR__)->load();
 $autoloadDirectories = [
     'app/utils',
     'database',
+    'database/tables',
     'app/models',
     'app/controllers',
     'routes'
@@ -21,4 +22,4 @@ foreach ($autoloadDirectories as $directory) {
     }
 }
 
-Router::dispatch($_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD']);
+Router::run($_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD']);
