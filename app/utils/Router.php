@@ -52,6 +52,6 @@ class Router {
     } 
 
     public static function view($viewName) { 
-        include 'views/' . $viewName . '.php';
+        include 'resources/views/' . $viewName . '.php';
     } 
 } 

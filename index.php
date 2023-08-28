@@ -8,12 +8,12 @@ require_once __DIR__ . '/vendor/autoload.php';
 Dotenv\Dotenv::createImmutable(__DIR__)->load();
 
 $autoloadDirectories = [
-    'app/utils',
-    'database',
+    'database/builder',
     'database/tables',
+    'app/utils', 
     'app/models',
     'app/controllers',
-    'routes'
+    'resources'
 ];
 
 foreach ($autoloadDirectories as $directory) {
