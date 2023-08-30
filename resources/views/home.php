@@ -1,6 +1,6 @@
 <?php
     include 'partials/header.php'; 
-    include 'partials/nav.php';  
+    include 'partials/nav.php';   
 ?>
 
 <h1>HOME</h1>

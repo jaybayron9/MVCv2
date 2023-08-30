@@ -1,4 +1,5 @@
-<?php
+<?php 
+
 trait Json {
     public static function json($data) {
         header('Content-Type: application/json');

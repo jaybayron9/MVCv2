@@ -1,6 +1,4 @@
-<?php
-
-namespace Auth;
+<?php 
 
 use SQL\ConnectDB;
 use SQL\SchemaBuilder;
@@ -8,7 +6,7 @@ use SQL\SchemaBuilder;
 class CreateUsersTable extends ConnectDB {
     public function up() {
         $schemaBuilder = new SchemaBuilder(ConnectDB::$conn); 
-        $schemaBuilder->table('users')
+        $schemaBuilder->table('users_authentications')
             ->primaryKey()->autoIncrement()->notNullable()
             ->string('name')->nullable()
             ->string('phone', 100)->nullable()
@@ -24,6 +22,6 @@ class CreateUsersTable extends ConnectDB {
     }
 
     public function down() {
-        ConnectDB::$conn->exec("DROP TABLE IF EXISTS 'users'");
+        ConnectDB::$conn->exec("DROP TABLE IF EXISTS users");
     }
 }

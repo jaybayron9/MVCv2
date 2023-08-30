@@ -3,6 +3,6 @@
         <a href="/">home</a> 
     </li>
     <li>
-        <a href="/posts">posts</a>
+        <a href="/user/1/2">about</a>
     </li>
 </ul>
