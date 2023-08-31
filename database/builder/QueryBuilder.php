@@ -12,9 +12,14 @@ class QueryBuilder extends ConnectDB {
     protected $limit; 
     protected $unionQueries = []; 
 
-    public function table($table) {
+    public function setTable($table) {
         $this->table = $table;
         return $this;
+    }
+
+    public function all() {
+        $this->select('*');
+        return $this;  
     }
 
     public function select($columns) {
@@ -22,8 +27,21 @@ class QueryBuilder extends ConnectDB {
         return $this;
     }
 
-    public function where($column, $operator, $value) {
-        $this->where[] = compact('column', 'operator', 'value');
+    public function where($conditions, $operator = 'AND') {
+        $conditionsClause = '';
+        $conditionStrings = [];
+        
+        foreach ($conditions as $condition) {
+            $column = $condition[0];
+            $operator = $condition[1];
+            $value = $condition[2];
+            $conditionStrings[] = "{$column} {$operator} '{$value}'";
+        }
+    
+        if (!empty($conditionStrings)) {
+            $conditionsClause = implode(" {$operator} ", $conditionStrings);
+            $conditionsClause = "WHERE {$conditionsClause}";
+        } 
         return $this;
     }
 
@@ -49,10 +67,10 @@ class QueryBuilder extends ConnectDB {
         return $this;
     }
 
-    public function query($sql) {
+    public function query($sql, $params = []) {
         try {
             $statement = ConnectDB::$conn->prepare($sql);
-            $statement->execute();
+            $statement->execute($params);
 
             return $statement->fetchAll();
         } catch (PDOException $e) {
