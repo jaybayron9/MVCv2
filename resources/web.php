@@ -1,10 +1,5 @@
 <?php  
 
-use Router\Router; 
-use AuthController\AuthController;
+use Router\Router;
 
-Router::get('/', function() {
-    Router::view('home');
-});
-
-Router::get('/testquery', [AuthController::class, 'testQuery']);
+Router::get('/', fn() => view('home'));   

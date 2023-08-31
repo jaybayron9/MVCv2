@@ -1,7 +1,7 @@
 <?php 
 
 namespace Router;
- 
+
 use InvalidArgumentException;
 
 class Router {
@@ -18,7 +18,7 @@ class Router {
         }
     }
 
-    public static function post($uri, $action, $name) {
+    public static function post($uri, $action, $name = '') {
         Router::addRoute('POST', $uri, $action, $name);
     } 
 
@@ -27,7 +27,7 @@ class Router {
         Router::$namedRoutes[$name] = $uri;
     }
 
-    public static function route($name) {
+    public static function name($name) {
         if (isset(Router::$namedRoutes[$name])) {
             return Router::$namedRoutes[$name];
         }
@@ -68,9 +68,5 @@ class Router {
         }
 
         echo "404 Not Found";
-    } 
-
-    public static function view($viewName) { 
-        include 'resources/views/' . $viewName . '.php';
     } 
 } 
