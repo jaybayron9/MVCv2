@@ -1,5 +1,5 @@
 <?php  
 
-use Router\Router;
+use utils\Router;
 
 Router::get('/', fn() => view('home'));
