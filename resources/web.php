@@ -2,4 +2,4 @@
 
 use Router\Router;
 
-Router::get('/', fn() => view('home'));   
+Router::get('/', fn() => view('home'));
